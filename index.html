@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ветеринарный врач | Запись и консультация</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2e7d32">
+    <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2e7d32">
+</head>
+<body>
+    <div id="install-banner" style="display: none; background: #2e7d32; color: white; padding: 15px; text-align: center; position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;">
+    <span id="install-text">Установите приложение для быстрого доступа</span>
+    <button id="ios-instructions-btn" style="display: none; background: white; color: #2e7d32; border: none; padding: 5px 10px; margin-left: 10px; cursor: pointer; border-radius: 4px;">Инструкция iOS</button>
+    <button id="install-pwa-btn" style="background: white; color: #2e7d32; border: none; padding: 5px 10px; margin-left: 10px; cursor: pointer; border-radius: 4px;">Установить</button>
+    <button onclick="document.getElementById('install-banner').style.display='none'" style="background: transparent; color: white; border: none; font-size: 20px; margin-left: 10px; cursor: pointer;">&times;</button>
+</div>
+
+<!-- Модальное окно для iOS -->
+<div id="ios-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; justify-content: center; align-items: center;">
+    <div style="background: white; padding: 20px; border-radius: 8px; max-width: 300px; text-align: center;">
+        <h3>Как установить на iPhone/iPad:</h3>
+        <p>1. Нажмите кнопку "Поделиться" <span style="font-size: 20px;">⎋</span> внизу браузера Safari.</p>
+        <p>2. Выберите "На экран «Домой»" <span style="font-size: 20px;">+</span>.</p>
+        <button onclick="document.getElementById('ios-modal').style.display='none'; localStorage.setItem('vet_app_installed', 'true'); document.getElementById('install-banner').style.display='none';" class="btn">Понятно</button>
+    </div>
+</div>
+    <header>
+        <div class="container">
+            <h1>Др. Иванов А.В.</h1>
+            <nav>
+                <a href="#services">Услуги</a>
+                <a href="#about">О враче</a>
+                <a href="#booking">Запись</a>
+                <a href="#chat">Чат</a>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero">
+        <div class="container">
+            <h2>Профессиональная помощь вашим питомцам</h2>
+            <p>Терапия, хирургия, вакцинация и экстренная помощь 24/7</p>
+            <a href="#booking" class="btn">Записаться на прием</a>
+        </div>
+    </section>
+
+    <section id="services" class="container">
+        <h2>Услуги</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Терапия</h3>
+                <p>Диагностика и лечение внутренних заболеваний.</p>
+            </div>
+            <div class="card">
+                <h3>Хирургия</h3>
+                <p>Плановые и экстренные операции любой сложности.</p>
+            </div>
+            <div class="card">
+                <h3>Вакцинация</h3>
+                <p>Профилактика инфекционных заболеваний.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="container">
+        <h2>О враче</h2>
+        <div class="about-content">
+            <img src="https://via.placeholder.com/150" alt="Фото врача" class="avatar">
+            <div>
+                <p><strong>Опыт работы:</strong> 10 лет</p>
+                <p>Специализация: мелкие домашние животные. Регулярное повышение квалификации в ведущих клиниках Европы.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="booking" class="container">
+        <h2>Запись на прием</h2>
+        <form id="bookingForm">
+            <input type="text" placeholder="Ваше имя" required>
+            <input type="tel" placeholder="Телефон" required>
+            <select>
+                <option value="">Выберите услугу</option>
+                <option value="therapy">Терапия</option>
+                <option value="surgery">Хирургия</option>
+            </select>
+            <button type="submit" class="btn">Отправить заявку</button>
+        </form>
+    </section>
+
+    <section id="chat" class="container">
+        <h2>Онлайн-консультация</h2>
+        <form id="chatForm">
+            <textarea placeholder="Опишите проблему..." rows="4"></textarea>
+            <button type="submit" class="btn">Написать врачу</button>
+        </form>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Ветеринарная клиника. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
