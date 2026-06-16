@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ветеринарный врач | Запись и консультация</title>
     
-    <!-- Иконки для браузера и iOS -->
+    <!-- Иконки -->
     <link rel="icon" type="image/png" sizes="192x192" href="icon23-192.png">
     <link rel="apple-touch-icon" href="icon23-192.png">
     
@@ -16,22 +16,35 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="install-banner" style="display: none; background: #2e7d32; color: white; padding: 15px; text-align: center; position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;">
-    <span id="install-text">Установите приложение для быстрого доступа</span>
-    <button id="ios-instructions-btn" style="display: none; background: white; color: #2e7d32; border: none; padding: 5px 10px; margin-left: 10px; cursor: pointer; border-radius: 4px;">Инструкция iOS</button>
-    <button id="install-pwa-btn" style="background: white; color: #2e7d32; border: none; padding: 5px 10px; margin-left: 10px; cursor: pointer; border-radius: 4px;">Установить</button>
-    <button onclick="document.getElementById('install-banner').style.display='none'" style="background: transparent; color: white; border: none; font-size: 20px; margin-left: 10px; cursor: pointer;">&times;</button>
-</div>
 
-<!-- Модальное окно для iOS -->
-<div id="ios-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; justify-content: center; align-items: center;">
-    <div style="background: white; padding: 20px; border-radius: 8px; max-width: 300px; text-align: center;">
-        <h3>Как установить на iPhone/iPad:</h3>
-        <p>1. Нажмите кнопку "Поделиться" <span style="font-size: 20px;">⎋</span> внизу браузера Safari.</p>
-        <p>2. Выберите "На экран «Домой»" <span style="font-size: 20px;">+</span>.</p>
-        <button onclick="document.getElementById('ios-modal').style.display='none'; localStorage.setItem('vet_app_installed', 'true'); document.getElementById('install-banner').style.display='none';" class="btn">Понятно</button>
+    <!-- БАННЕР УСТАНОВКИ (КНОПКИ) -->
+    <div id="install-banner" style="display: none; background: #2e7d32; color: white; padding: 15px; text-align: center; position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+        <span id="install-text" style="vertical-align: middle;">Установите приложение для быстрого доступа</span>
+        
+        <!-- Кнопка инструкции для iOS -->
+        <button id="ios-instructions-btn" style="display: none; background: white; color: #2e7d32; border: none; padding: 8px 15px; margin-left: 10px; cursor: pointer; border-radius: 4px; font-weight: bold; vertical-align: middle;">
+            🍎 Инструкция iOS
+        </button>
+        
+        <!-- Кнопка установки для Android/Desktop -->
+        <button id="install-pwa-btn" style="background: white; color: #2e7d32; border: none; padding: 8px 15px; margin-left: 10px; cursor: pointer; border-radius: 4px; font-weight: bold; vertical-align: middle;">
+            ⬇️ Установить
+        </button>
+        
+        <!-- Кнопка закрытия -->
+        <button onclick="document.getElementById('install-banner').style.display='none'; localStorage.setItem('vet_app_installed', 'true');" style="background: transparent; color: white; border: none; font-size: 24px; margin-left: 15px; cursor: pointer; vertical-align: middle; line-height: 1;">&times;</button>
     </div>
-</div>
+
+    <!-- МОДАЛЬНОЕ ОКНО ДЛЯ IOS -->
+    <div id="ios-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; justify-content: center; align-items: center;">
+        <div style="background: white; padding: 25px; border-radius: 12px; max-width: 320px; text-align: center; color: #333;">
+            <h3 style="margin-top: 0;">Установка на iPhone/iPad</h3>
+            <p style="text-align: left;">1. Нажмите кнопку <b>"Поделиться"</b> <span style="font-size: 20px;">⎋</span> внизу Safari.</p>
+            <p style="text-align: left;">2. Пролистайте вниз и выберите <b>"На экран «Домой»"</b> <span style="font-size: 20px;">+</span>.</p>
+            <button onclick="document.getElementById('ios-modal').style.display='none'; localStorage.setItem('vet_app_installed', 'true'); document.getElementById('install-banner').style.display='none';" class="btn" style="width: 100%; margin-top: 10px;">Понятно</button>
+        </div>
+    </div>
+
     <header>
         <div class="container">
             <h1>Др. Иванов А.В.</h1>
@@ -110,5 +123,16 @@
     </footer>
 
     <script src="script.js"></script>
+    
+    <!-- Регистрация Service Worker -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('SW registered'))
+                    .catch(err => console.log('SW failed:', err));
+            });
+        }
+    </script>
 </body>
 </html>
