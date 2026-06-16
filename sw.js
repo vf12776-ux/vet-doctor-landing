@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v2'; // ← МЕНЯЙ ЭТУ ВЕРСИЮ ПРИ КАЖДОМ ОБНОВЛЕНИИ
+const CACHE_VERSION = 'v3'; // ← МЕНЯЙ ЭТУ ВЕРСИЮ ПРИ КАЖДОМ ОБНОВЛЕНИИ
 const CACHE_NAME = `vet-landing-${CACHE_VERSION}`;
 const urlsToCache = [
   '/',
