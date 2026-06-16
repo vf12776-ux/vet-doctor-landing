@@ -18,22 +18,19 @@
 <body>
 
     <!-- БАННЕР УСТАНОВКИ (КНОПКИ) -->
-    <div id="install-banner" style="display: none; background: #2e7d32; color: white; padding: 15px; text-align: center; position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
-        <span id="install-text" style="vertical-align: middle;">Установите приложение для быстрого доступа</span>
-        
-        <!-- Кнопка инструкции для iOS -->
-        <button id="ios-instructions-btn" style="display: none; background: white; color: #2e7d32; border: none; padding: 8px 15px; margin-left: 10px; cursor: pointer; border-radius: 4px; font-weight: bold; vertical-align: middle;">
-            🍎 Инструкция iOS
-        </button>
-        
-        <!-- Кнопка установки для Android/Desktop -->
-        <button id="install-pwa-btn" style="background: white; color: #2e7d32; border: none; padding: 8px 15px; margin-left: 10px; cursor: pointer; border-radius: 4px; font-weight: bold; vertical-align: middle;">
-            ⬇️ Установить
-        </button>
-        
-        <!-- Кнопка закрытия -->
-        <button onclick="document.getElementById('install-banner').style.display='none'; localStorage.setItem('vet_app_installed', 'true');" style="background: transparent; color: white; border: none; font-size: 24px; margin-left: 15px; cursor: pointer; vertical-align: middle; line-height: 1;">&times;</button>
-    </div>
+    <div id="install-banner" style="display: none;">
+    <span id="install-text">📲 Установите приложение для быстрой связи с врачом</span>
+    
+    <button id="ios-instructions-btn" style="display: none;">
+        🍎 Как установить на iOS
+    </button>
+    
+    <button id="install-pwa-btn" style="display: none;">
+        ⬇️ Установить приложение
+    </button>
+    
+    <button onclick="document.getElementById('install-banner').style.display='none'; localStorage.setItem('vet_app_installed', 'true');">&times;</button>
+</div>
 
     <!-- МОДАЛЬНОЕ ОКНО ДЛЯ IOS -->
     <div id="ios-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; justify-content: center; align-items: center;">

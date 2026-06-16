@@ -88,3 +88,63 @@ footer {
     padding: 20px 0; 
     margin-top: 40px; 
 }
+/* Стили для баннера установки */
+#install-banner {
+    background: #ffffff;
+    color: #333;
+    border-bottom: 2px solid #2e7d32;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 12px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    font-size: 14px;
+    animation: slideDown 0.5s ease-out;
+}
+
+#install-text {
+    font-weight: 500;
+}
+
+/* Кнопки внутри баннера */
+#install-pwa-btn, #ios-instructions-btn {
+    background: #2e7d32;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.2s, background 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#install-pwa-btn:hover, #ios-instructions-btn:hover {
+    background: #1b5e20;
+    transform: translateY(-1px);
+}
+
+/* Кнопка закрытия (крестик) */
+#install-banner button:last-child {
+    color: #999;
+    font-size: 20px;
+    padding: 0 5px;
+}
+
+#install-banner button:last-child:hover {
+    color: #333;
+}
+
+/* Анимация появления */
+@keyframes slideDown {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(0); }
+}
+
+/* Модальное окно iOS */
+#ios-modal div {
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
