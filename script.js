@@ -1,45 +1,62 @@
-let deferredPrompt;
 const installBanner = document.getElementById('install-banner');
 const installBtn = document.getElementById('install-pwa-btn');
 const iosBtn = document.getElementById('ios-instructions-btn');
 const iosModal = document.getElementById('ios-modal');
+
+// Проверяем: запущено ли уже как приложение или пользователь уже завершил установку
+const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+const isAlreadyInstalled = localStorage.getItem('vet_app_installed') === 'true';
 const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
-// Проверка, было ли уже установлено/закрыто
-if (!localStorage.getItem('vet_app_installed')) {
+if (!isStandalone && !isAlreadyInstalled) {
+    // 1. Показываем баннер, так как еще НЕ установлено
+    if (installBanner) installBanner.style.display = 'block';
+
     if (isIOS) {
-        // Для iOS показываем инструкцию
-        installBanner.style.display = 'block';
-        installBtn.style.display = 'none';
-        iosBtn.style.display = 'inline-block';
+        // iOS: показываем только кнопку инструкции
+        if (installBtn) installBtn.style.display = 'none';
+        if (iosBtn) iosBtn.style.display = 'inline-block';
         
-        iosBtn.addEventListener('click', () => {
-            iosModal.style.display = 'flex';
-        });
+        if (iosBtn) {
+            iosBtn.addEventListener('click', () => {
+                if (iosModal) iosModal.style.display = 'flex';
+            });
+        }
     } else {
-        // Для остальных браузеров ждем события beforeinstallprompt
+        // Android/Desktop: показываем кнопку установки
+        if (iosBtn) iosBtn.style.display = 'none';
+        if (installBtn) installBtn.style.display = 'inline-block';
+
+        let deferredPrompt;
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            installBanner.style.display = 'block';
-            iosBtn.style.display = 'none';
-            
+        });
+
+        if (installBtn) {
             installBtn.addEventListener('click', async () => {
                 if (deferredPrompt) {
                     deferredPrompt.prompt();
                     const { outcome } = await deferredPrompt.userChoice;
+                    
                     if (outcome === 'accepted') {
+                        // 2. УСТАНОВЛЕНО: скрываем баннер и запоминаем это
                         installBanner.style.display = 'none';
                         localStorage.setItem('vet_app_installed', 'true');
                     }
                     deferredPrompt = null;
+                } else {
+                    alert('Нажмите на иконку установки (плюсик или монитор) в правой части адресной строки браузера.');
                 }
             });
-        });
+        }
     }
+} else {
+    // 3. УЖЕ УСТАНОВЛЕНО: гарантированно скрываем баннер при загрузке
+    if (installBanner) installBanner.style.display = 'none';
 }
 
-// Стандартная логика форм
+// Обработка форм
 document.getElementById('bookingForm').addEventListener('submit', function(e) {
     e.preventDefault();
     alert('Заявка отправлена! (Демо-режим)');
