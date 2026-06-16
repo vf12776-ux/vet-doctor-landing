@@ -90,6 +90,9 @@ footer {
 }
 /* Стили для баннера установки */
 #install-banner {
+    position: sticky; /* Остается наверху при скролле */
+    top: 0;
+    z-index: 1000;
     background: #ffffff;
     color: #333;
     border-bottom: 3px solid #2e7d32;
@@ -101,7 +104,7 @@ footer {
     gap: 20px;
     font-size: 16px;
     animation: slideDown 0.5s ease-out;
-    flex-wrap: wrap; /* Чтобы на мобильных не ломалось */
+    flex-wrap: wrap;
 }
 
 #install-text {
@@ -109,29 +112,29 @@ footer {
     font-size: 16px;
 }
 
-/* Кнопки внутри баннера - делаем крупнее и заметнее */
+/* Кнопки внутри баннера */
 #install-pwa-btn, #ios-instructions-btn {
     background: #2e7d32;
     color: white;
     border: none;
-    padding: 12px 28px; /* Увеличили отступы */
-    border-radius: 25px; /* Более округлая */
+    padding: 12px 28px;
+    border-radius: 25px;
     cursor: pointer;
     font-weight: bold;
-    font-size: 16px; /* Увеличили шрифт */
-    box-shadow: 0 4px 10px rgba(46, 125, 50, 0.4); /* Тень для объема */
+    font-size: 16px;
+    box-shadow: 0 4px 10px rgba(46, 125, 50, 0.4);
     transition: all 0.3s ease;
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    animation: pulse 2s infinite; /* Легкая пульсация для привлечения внимания */
+    animation: pulse 2s infinite;
 }
 
 #install-pwa-btn:hover, #ios-instructions-btn:hover {
     background: #1b5e20;
     transform: translateY(-2px) scale(1.05);
     box-shadow: 0 6px 15px rgba(46, 125, 50, 0.6);
-    animation: none; /* Останавливаем пульсацию при наведении */
+    animation: none;
 }
 
 /* Кнопка закрытия (крестик) */
